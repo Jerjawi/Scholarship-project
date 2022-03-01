@@ -1,0 +1,15 @@
+{% extends 'Profile/base.html' %}
+{% load crispy_forms_tags %}
+
+{%block content%}
+<div class = 'container my-5'>
+    <form method="post" enctype="multipart/form-data">
+        <h1> Hi {{user.username}}, Wanna To update your Data? </h1>
+        <hr>
+        <h1>Update Your Info</h1>
+        {%csrf_token %}
+        {{form|crispy}}
+        <button class="btn btn-success my-3" type = 'submit'>Update</button>
+    </form>
+</div>
+{%endblock%}

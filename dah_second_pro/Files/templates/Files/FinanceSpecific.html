@@ -1,0 +1,43 @@
+{% extends 'Profile/base.html' %}
+
+{% block content %}
+    <div class="container my-3 p-2 border">
+        <h1>Files of <strong>{{user.username}}</strong> </h1>
+        <a class="btn btn-primary" href="{%url 'create_file'%}">New File</a>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">File name</th>
+                <th scope="col">Student</th>
+                <th scope="col">Download</th>
+                <th scope="col">Date</th>
+                <th scope="col">update</th>
+                <th scope="col">Delete</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+                {% for file in object_list %}
+              <tr>
+                <th scope="row"> #{{ forloop.counter }} </th>
+                <th scope="row"> {{file.Finance_name}} </th>
+                <td> {{file.Finance_student}} </td>
+                <td> <a href="{{ file.finance_reports.url }}" download>Download plan</a></td>
+                <td>{{file.date|date:"M d, Y" }}</td>
+                <td><a href="{% url 'Finance_Update' file.pk %}">update</a></td>
+                <td><a href="{% url 'Finance_Delete' file.pk %}">Delete</a></td>
+                
+               
+                
+              </tr>
+              {% endfor %}
+              
+            </tbody>
+          </table>
+    </div>
+    
+{% endblock content %}
+
+
+<!-- <td><a href="{% url 'update_files' file.pk %}">update</a></td> -->

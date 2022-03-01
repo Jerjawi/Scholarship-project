@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel ='stylesheet' href = "{% static 'css/style.css' %}"/>
+    <link rel ='stylesheet' href = "{% static 'css/all.min.css' %}"/>
+    <title>
+      {% block title %}
+        Files_view
+      {% endblock title %}
+    </title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><i class="fas fa-user-graduate"></i></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{%url 'start_view'%}">Home</a>
+              </li>
+            {% if user.is_authenticated %}
+                {%if user.is_superuser%}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{%url 'files_of' user.username%}"></a>
+                  </li>
+                {%else%}
+                <li class="nav-item">
+                  <a class="nav-link" href="{%url 'files_of' user.username%}">Files</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{%url 'specific_marks' user.username%}">Marks</a>
+                </li>
+                {% endif %}
+            {%endif%}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Account
+                </a>
+                
+                  <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                    {% if user.is_authenticated %}
+                      <li><a class="dropdown-item" href="{% url 'logout'%}">Logout</a></li>
+                    {% else %}
+                      <li><a class="dropdown-item" href="{% url 'login'%}">login</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="{% url 'register'%}">Register</a></li>
+                    {% endif %}
+                </ul>
+              </li>
+              {% if user.is_superuser %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  All_File
+                </a>
+                
+                  <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                    
+                      <li><a class="dropdown-item" href="{% url 'superuser_view'%}">All_Files</a></li>
+                      <li><a class="dropdown-item" href="{% url 'superuser_marks'%}">All_Marks</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="{% url 'all_profiles'%}">All_Profiles</a></li>
+               
+                </ul>
+              </li>
+              {% endif %}
+              {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'detail_profile' user.profile.pk %}"></a>
+                  </li>
+                {%else%}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'detail_profile' user.profile.pk %}">Profile</a>
+                </li>
+                {%endif %}
+              {%endif %}
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    
+    {% if messages %}
+      {% for message in messages %}
+          <div class="text-center alert alert-{{ message.tags }}">
+              {{ message|safe }}
+          </div>
+      {% endfor %}
+    {% endif %}
+      
+    {% block content %}
+    {% endblock content %}
+      
+    <div class="footer mt-auto" >
+       
+      <div class = 'contact'>
+        <div>
+          <div class="nael accounts">
+            Mr Nael Accounts
+          </div>
+          <a href = '#'>
+            <i class="fab fa-facebook-f"></i>
+            <span>Facebook |</span>
+          </a>
+          <a href = '#'>
+            <i class="fab fa-whatsapp"></i>
+              <span> Whatsapp</span>
+          </a>
+        </div>
+        <div>
+          <p class="my-2">Designed by Mohammed Rami AbuWardh, A Medical Student in This Scholarship</p>
+        </div>
+      </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+</body>
+</html>

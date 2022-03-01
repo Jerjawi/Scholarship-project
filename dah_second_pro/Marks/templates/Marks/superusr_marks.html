@@ -1,0 +1,43 @@
+{% extends 'Profile/base.html' %}
+
+{% block content %}
+    <div class="container my-3 p-2 border">
+        <h1>Marks of <strong>{{user.username}}</strong> </h1>
+        <a class="btn btn-primary" href="{%url 'mark_create'%}">New File</a>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Mark name</th>
+                <th scope="col">Student</th>
+                <th scope="col">Download</th>
+                <th scope="col">Date</th>
+                <th scope="col">update</th>
+                <th scope="col">Delete</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+                {% for mark in all_marks %}
+              <tr>
+                <th scope="row"> #{{ forloop.counter }} </th>
+                <th scope="row"> {{mark.marks_name}} </th>
+                <td><a href = "{%url 'specific_marks' mark.mark_student%}">{{mark.mark_student}}</a>  </td>
+                <td> <a href="{{ mark.marks.url }}" download>Download plan</a></td>
+                <td>{{mark.date|date:"M d, Y" }}</td>
+                <td><a href="{%url 'Marks_Update' mark.pk%}">update</a></td>
+                <td><a href="{%url 'Marks_delete' mark.pk%}">Delete</a></td>
+                
+               
+                
+              </tr>
+              {% endfor %}
+              
+            </tbody>
+          </table>
+    </div>
+    
+{% endblock content %}
+
+
+<!-- <td><a href="{% url 'update_files' file.pk %}">update</a></td> -->

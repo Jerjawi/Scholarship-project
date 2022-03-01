@@ -1,0 +1,36 @@
+{% extends 'Profile/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1> {{marks.marks_name}}</h1>
+        
+        
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">File name</th>
+                <th scope="col">Student</th>
+                <th scope="col">Download</th>
+                <th scope="col">Date</th>
+                <th scope="col">update</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+                
+              <tr>
+                <th scope="row"> # </th>
+                <th scope="row"> {{marks.marks_name}} </th>
+                <td> <a href="#">{{marks.mark_student}}</a> </td>
+                <td> <a href="{{ marks.marks.url }}" download>Download</a></td>
+                <td>{{marks.date}}</td>
+                <td><a href="{%url 'Marks_Update' marks.pk%}">update</a></td>
+                <td><a href="{%url 'Marks_delete' marks.pk%}">Delete</a></td>
+              </tr>
+
+              
+            </tbody>
+          </table>
+    </div>
+{% endblock content %}

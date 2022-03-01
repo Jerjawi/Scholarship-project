@@ -1,0 +1,48 @@
+{% extends 'Profile/base.html' %}
+{% load static %}
+
+{%block content%}
+<div class="container my-5">
+    <div class="card mb-3" >
+        <div class="row g-0">
+        <div class="col-md-6">
+            <img src="{% static 'images/UAK.jpg' %}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-6">
+            <div class="card-body">
+                <div class="d-flex flex-column align-items-center align-content-between">
+                    <h5 class="card-title">منحة الامارات للطلبة العرب</h5>
+                    <p class="card-text">
+                        تهدف دولة الامارات الى مساعدة الطلبة الفلسطينيين ....
+                    </p>   
+                    <p class="card-text"><small class="text-muted">كلام</small></p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div style="color : #abe8ed;background-color: #f6f6f6">
+        <h1 class = 'text-center'>
+            Action
+        </h1>
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-outline-primary btn-lg mx-3">
+                <a class = 'text-dark text-decoration-none' href="{%url 'mark_create'%}">New Marks</a>
+                
+
+            </button>
+            <button type="button" class="btn btn-outline-primary btn-lg">
+                <a class = 'text-dark text-decoration-none' href="{%url 'create_file'%}"> 
+                    New Finance File
+                </a>
+               
+
+            </button>
+        </div>
+
+
+
+    </div>
+</div>
+
+{%endblock%}

@@ -1,0 +1,17 @@
+{% extends 'Profile/base.html' %}
+{%block content%}
+<div class = 'container my-5'>
+    <form method="post" enctype="multipart/form-data">
+        {%csrf_token %}
+        <h1>Delete Files</h1>
+        <h2>-----</h2>
+        <p>Are You sure you want to delete <br> <strong><span class="text-danger">{{finance.Finance_name}} ?</span></strong></p>
+        
+        <button class="btn btn-danger" type = 'submit'>Delete</button>
+        <button class="btn btn-success">
+            <a class = 'text-white' href="{%url 'files_of' finance.Finance_student%}">Back to Your Files</a>
+        </button>
+
+    </form>
+</div>
+{%endblock%}

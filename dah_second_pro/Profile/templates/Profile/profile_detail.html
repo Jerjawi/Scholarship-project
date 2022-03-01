@@ -1,0 +1,63 @@
+{% extends 'Profile/base.html' %}
+
+{% block title %}
+  student_detail
+{% endblock title %}
+
+{% block content %}
+    <div class="container my-4 border">
+      <div class="row my-4 p-2">
+        <div class = 'col-md-4 col-sm-12'>
+          {%if profile.image %}
+            <img class=" account-img" src="{{ profile.image.url }}"/>
+          {%else%}
+            <p>لم يتم تحميل الصورة</p>
+          {%endif%}
+          <h1>Student Name : {{ profile.user.username }}</h1>
+          <p>Student Age : {{profile.age }} years</p>
+          <p>Student email : {{profile.email }}</p>
+          <p>Student phone_number : {{profile.phone_number }}</p>
+          <p>Student living_place : {{profile.living_place }}</p>
+        </div> 
+        
+        <div class = 'col-md-4 col-sm-12'>
+          <h1>Spefic info</h1>
+          <p>Student id_number : {{profile.id_number }}</p>
+          <p>Student unversity : {{profile.unversity }}</p>
+          <p>Student specialization : {{profile.specialization }}</p>
+          <p>Student year_of_graduation : {{profile.year_of_graduation }}</p>
+          <p>Student achieved_hours : {{profile.achieved_hours }}</p>
+          <p>Student still_hours : {{profile.still_hours }}</p>
+          <p>Student Cumulative_average : {{profile.Cumulative_average }}</p>
+          <p>Student seimester_average : {{profile.seimester_average }}</p>
+          <p>Student price_of_hour : {{profile.price_of_hour }} dinar </p>
+          <p>Student unversity_id_number : {{profile.unversity_id_number }}</p>
+          <p>Student comment_about_behavoir : {{profile.comment_about_behavoir }}</p>
+        </div> 
+          
+        <div class="col-md-4 col-sm-12">
+          <button type="button" class="btn btn-outline-warning">
+
+            <a href ="{%url 'profile_update' user.profile.pk%}"> Update
+
+            </a>
+          </button>
+          <button type="button" class="btn btn-outline-warning">
+
+            <a href ="{%url 'files_of' user.username%}"> View Files
+
+            </a>
+          </button>
+          <button type="button" class="btn btn-outline-warning">
+
+            <a href ="{%url 'specific_marks' user.username%}"> View Marks
+
+            </a>
+          </button>
+          
+        </div>
+
+      
+  
+
+{% endblock content %}
